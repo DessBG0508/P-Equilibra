@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <linearGradient id="stormGrad" x1="30" y1="15" x2="100" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#64748B" />
+      <stop offset="70%" stopColor="#475569" />
+      <stop offset="100%" stopColor="#334155" />
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0" y1="0" x2="15" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FDE047" />
+      <stop offset="100%" stopColor="#EAB308" />
+    </linearGradient>
+    <filter id="stormGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1E293B" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <!-- Nube oscura de tormenta -->
+  <path d="M38 78
+    C25 78 16 68 16 56
+    C16 45 24 36 34 34
+    C37 20 49 12 64 12
+    C79 12 91 20 95 34
+    C105 35 113 44 113 55
+    C113 67 104 78 91 78
+    Z"
+    fill="url(#stormGrad)"
+    filter="url(#stormGlow)"
+  />
+  <!-- Ojos abrumados / en X o semicírculos caídos -->
+  <path d="M46 48 L52 54 M52 48 L46 54" stroke="#F1F5F9" stroke-width="2.6" stroke-linecap="round" />
+  <path d="M76 48 L82 54 M82 48 L76 54" stroke="#F1F5F9" stroke-width="2.6" stroke-linecap="round" />
+  <!-- Boca ondulada de preocupación -->
+  <path d="M57 63 Q61 59 64 63 T71 63" stroke="#F1F5F9" stroke-width="2.6" stroke-linecap="round" fill="none" />
+  <!-- Rayito de tormenta -->
+  <polygon points="68,76 59,92 66,92 61,108 76,89 69,89" fill="url(#boltGrad)" stroke="#CA8A04" stroke-width="0.8" />
+  <!-- Gotitas de lluvia -->
+  <path d="M36 86 C36 86 34 94 34 97 C34 99 36 101 37 101 C39 101 40 99 40 97 C40 94 36 86 36 86 Z" fill="#38BDF8" />
+  <path d="M88 84 C88 84 86 92 86 95 C86 97 88 99 89 99 C91 99 92 97 92 95 C92 92 88 84 88 84 Z" fill="#38BDF8" />
+  <path d="M48 96 C48 96 46 102 46 105 C46 107 47 108 48 108 C50 108 51 107 51 105 C51 102 48 96 48 96 Z" fill="#38BDF8" />
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <linearGradient id="cloudNormGrad" x1="30" y1="20" x2="100" y2="105" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="60%" stopColor="#F1F5F9" />
+      <stop offset="100%" stopColor="#CBD5E1" />
+    </linearGradient>
+    <filter id="cloudNormGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#475569" flood-opacity="0.14" />
+    </filter>
+  </defs>
+  <!-- Nube neutral y tranquila -->
+  <path d="M38 88
+    C25 88 16 78 16 66
+    C16 55 24 46 34 44
+    C37 30 49 20 64 20
+    C79 20 91 30 95 44
+    C105 45 113 54 113 65
+    C113 77 104 88 91 88
+    Z"
+    fill="url(#cloudNormGrad)"
+    filter="url(#cloudNormGlow)"
+  />
+  <!-- Ojos serenos y curiosos -->
+  <circle cx="51" cy="54" r="3" fill="#334155" />
+  <circle cx="77" cy="54" r="3" fill="#334155" />
+  <!-- Boca neutra relajada -->
+  <line x1="59" y1="65" x2="69" y2="65" stroke="#334155" stroke-width="2.6" stroke-linecap="round" />
+  <!-- Mejillas neutras muy tenues -->
+  <ellipse cx="41" cy="62" rx="3.5" ry="2.5" fill="#CBD5E1" fill-opacity="0.8" />
+  <ellipse cx="87" cy="62" rx="3.5" ry="2.5" fill="#CBD5E1" fill-opacity="0.8" />
+</svg>

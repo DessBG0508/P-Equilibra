@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <linearGradient id="starGrad" x1="20" y1="10" x2="108" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FFE066" />
+      <stop offset="60%" stopColor="#FFC107" />
+      <stop offset="100%" stopColor="#FFA000" />
+    </linearGradient>
+    <filter id="starGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#FFA000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+  <!-- Estrella con puntas suaves y armónicas -->
+  <path d="M64 12
+    C66 28 73 40 85 45
+    C100 51 114 55 116 63
+    C118 71 104 80 94 90
+    C86 98 84 109 88 120
+    C91 127 84 130 78 124
+    C68 115 58 113 48 119
+    C40 124 35 120 38 112
+    C41 101 38 91 30 83
+    C19 72 8 66 11 58
+    C14 50 28 47 41 42
+    C53 37 61 26 64 12 Z"
+    fill="url(#starGrad)"
+    filter="url(#starGlow)"
+  />
+  <!-- Ojos felices estilo kawaii -->
+  <path d="M44 58 C46 51 52 51 54 58" stroke="#5D4037" stroke-width="3.5" stroke-linecap="round" fill="none" />
+  <path d="M74 58 C76 51 82 51 84 58" stroke="#5D4037" stroke-width="3.5" stroke-linecap="round" fill="none" />
+  <!-- Mejillas sonrosadas -->
+  <circle cx="39" cy="67" r="5" fill="#FF8A80" fill-opacity="0.65" />
+  <circle cx="89" cy="67" r="5" fill="#FF8A80" fill-opacity="0.65" />
+  <!-- Sonrisa radiante -->
+  <path d="M54 67 C58 75 70 75 74 67" stroke="#5D4037" stroke-width="3.5" stroke-linecap="round" fill="#D32F2F" />
+  <!-- Brillos estelares -->
+  <circle cx="48" cy="36" r="2.5" fill="#FFFFFF" fill-opacity="0.9" />
+  <circle cx="82" cy="40" r="1.8" fill="#FFFFFF" fill-opacity="0.8" />
+</svg>

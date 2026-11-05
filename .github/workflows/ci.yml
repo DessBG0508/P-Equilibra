@@ -1,0 +1,63 @@
+name: CI / Quality Gates
+
+on:
+  push:
+    branches:
+      - main
+      - "feature/**"
+      - "fix/**"
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint, Typecheck & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies (clean)
+        run: npm ci
+
+      - name: Code Quality & Linter (ESLint)
+        run: npm run lint
+
+      - name: Regenerate TanStack Route Tree
+        # Garantiza que src/routeTree.gen.ts esté sincronizado con src/routes/*.tsx
+        # antes del typecheck. Previene fallos de CI en fresh clone cuando el
+        # archivo committeado queda stale (fix P0 #1 de auditoría).
+        run: npx vite dev --port 0 &
+              VITE_PID=$!
+              sleep 8
+              kill $VITE_PID || true
+              wait $VITE_PID 2>/dev/null || true
+
+      - name: Strict Typecheck (TypeScript)
+        run: npx tsc --noEmit
+
+      - name: Cache Vite build artifacts
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.vite
+          key: ${{ runner.os }}-vite-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-vite-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-vite-
+
+      - name: Production Build (Vite)
+        run: npm run build

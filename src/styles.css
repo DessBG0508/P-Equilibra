@@ -1,0 +1,608 @@
+/* ============================================================================
+ * Equilibra TESH — Manual de Identidad Visual
+ * Carga de fuentes oficiales: Playfair Display (títulos) + Nunito (body)
+ * ============================================================================
+ * IMPORTANTE: Todos los @import deben ir AL INICIO del archivo, antes que
+ * cualquier otra regla (incluida @source de Tailwind). Si no, lightningcss
+ * lanza el error: "@import rules must precede all rules".
+ * ============================================================================
+ */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+
+@source "../src";
+
+@font-face {
+  font-family: "Milesdane";
+  src: url("/fonts/Milesdane_Trial.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design system definition — alineado al manual de identidad visual.
+ *
+ * Paleta principal (USAR EXACTAMENTE ESTOS HEX):
+ *   Azul profundo #1B198F  → --primary
+ *   Lila vívido   #6857E4  → --secondary / --accent
+ *   Verde azulado #12BDB6  → --teal
+ *   Cian brillante #00BCC8 → --cyan
+ *   Lavanda suave #C3B3F1  → --lavender
+ *   Lima          #A9DB1B  → --lime
+ * UI semantics:
+ *   Rosa alerta   #FF9CED  → --alert
+ *   Fondo lavanda #F1EDFC  → --bg-lavender
+ *   Fondo menta   #DFF7F2  → --bg-mint
+ * Tipografía:
+ *   Display: Playfair Display
+ *   Body:    Nunito
+ */
+
+@theme inline {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", "Milesdane", ui-serif, serif;
+  --font-serif: "Playfair Display", ui-serif, serif;
+  --font-numeric: "Playfair Display", ui-serif, serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  /* Tokens de marca alineados al manual */
+  --color-teal: var(--teal);
+  --color-cyan: var(--cyan);
+  --color-alert: var(--alert);
+  --color-lavender: var(--lavender);
+  --color-lime: var(--lime);
+  --color-mint-soft: var(--mint-soft);
+  --color-lavender-soft: var(--lavender-soft);
+  --color-cyan-soft: var(--cyan-soft);
+  --color-green-soft: var(--green-soft);
+  --color-bg-lavender: var(--bg-lavender);
+  --color-bg-mint: var(--bg-mint);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-float: var(--shadow-float);
+  --shadow-nav: var(--shadow-nav);
+}
+
+:root {
+  --radius: 1rem; /* 16px — tarjetas según manual */
+  /* Fondos y textos */
+  --background: #f1edfc; /* Fondo lavanda del manual */
+  --foreground: #1b198f; /* Azul profundo institucional */
+  --card: #FFFFFFFFFfff;
+  --card-foreground: #1b198f;
+  --popover: #FFFFFFFFFfff;
+  --popover-foreground: #1b198f;
+  /* Paleta principal */
+  --primary: #1b198f; /* Azul profundo */
+  --primary-foreground: #FFFFFFFFFfff;
+  --secondary: #6857e4; /* Lila vívido */
+  --secondary-foreground: #FFFFFFFFFfff;
+  --muted: #ebe5fb; /* Lavanda muy claro para backgrounds muted */
+  --muted-foreground: #5b5688; /* Azul-violeta apagado con contraste AA */
+  --accent: #6857e4;
+  --accent-foreground: #FFFFFFFFFfff;
+  --destructive: #ff9ced; /* Alerta rosa del manual */
+  --destructive-foreground: #1b198f;
+  --border: color-mix(in oklab, #c3b3f1 65%, transparent);
+  --input: #c3b3f1;
+  --ring: #1b198f; /* Focus outline azul profundo */
+  --teal: #12bdb6; /* Verde azulado — calma, éxito */
+  --cyan: #00bcc8; /* Cian brillante — destacados */
+  --alert: #ff9ced; /* Rosa alerta — crisis */
+  --lavender: #c3b3f1; /* Lavanda suave */
+  --lime: #a9db1b; /* Lima — acciones positivas */
+  --mint-soft: #dff7f2; /* Fondo menta */
+  --lavender-soft: #f1edfc; /* Fondo lavanda */
+  --cyan-soft: #00BCC8;
+  --green-soft: #effbe6;
+  --bg-lavender: #f1edfc;
+  --bg-mint: #dff7f2;
+  /* Sombras sutiles (sin agresividad) */
+  --shadow-soft: 0 6px 24px color-mix(in oklab, #1b198f 8%, transparent);
+  --shadow-float: 0 14px 40px color-mix(in oklab, #1b198f 12%, transparent);
+  --shadow-nav: 0 8px 28px color-mix(in oklab, #1b198f 10%, transparent);
+  /* Charts con la paleta del manual */
+  --chart-1: #1b198f;
+  --chart-2: #6857e4;
+  --chart-3: #12bdb6;
+  --chart-4: #00bcc8;
+  --chart-5: #a9db1b;
+  /* Sidebar (panel psicólogo) */
+  --sidebar: #FFFFFFFFFfff;
+  --sidebar-foreground: #1b198f;
+  --sidebar-primary: #1b198f;
+  --sidebar-primary-foreground: #FFFFFFFFFfff;
+  --sidebar-accent: #f1edfc;
+  --sidebar-accent-foreground: #1b198f;
+  --sidebar-border: color-mix(in oklab, #c3b3f1 60%, transparent);
+  --sidebar-ring: #1b198f;
+}
+
+.dark {
+  --background: #0f0e1a;
+  --foreground: #edeafb;
+  --card: #1b1930;
+  --card-foreground: #edeafb;
+  --popover: #1b1930;
+  --popover-foreground: #edeafb;
+  --primary: #8b7cf0; /* Lila más claro en dark para contraste */
+  --primary-foreground: #0f0e1a;
+  --secondary: #282348;
+  --secondary-foreground: #edeafb;
+  --muted: #211e39;
+  --muted-foreground: #a6a2c9;
+  --accent: #8b7cf0;
+  --accent-foreground: #FFFFFFFFFfff;
+  --destructive: #ff9ced;
+  --destructive-foreground: #1a0e36;
+  --border: rgba(237, 234, 251, 0.14);
+  --input: rgba(237, 234, 251, 0.18);
+  --ring: #8b7cf0;
+  --teal: #2bd9cf;
+  --cyan: #2bd9cf;
+  --alert: #ff9ced; /* FIJO en ambos temas */
+  --lavender: #c3b3f1;
+  --lime: #a9db1b;
+  --mint-soft: #142728;
+  --lavender-soft: #25203f;
+  --cyan-soft: #122633;
+  --green-soft: #152e25;
+  --bg-lavender: #1b1930;
+  --bg-mint: #142728;
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-float: 0 18px 48px rgba(0, 0, 0, 0.6);
+  --shadow-nav: 0 10px 35px rgba(0, 0, 0, 0.5);
+  --chart-1: #8b7cf0;
+  --chart-2: #2bd9cf;
+  --chart-3: #87ffbd;
+  --chart-4: #c084fc;
+  --chart-5: #38bdf8;
+  --sidebar: #1b1930;
+  --sidebar-foreground: #edeafb;
+  --sidebar-primary: #8b7cf0;
+  --sidebar-primary-foreground: #0f0e1a;
+  --sidebar-accent: #282348;
+  --sidebar-accent-foreground: #edeafb;
+  --sidebar-border: rgba(237, 234, 251, 0.14);
+  --sidebar-ring: #8b7cf0;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    min-width: 320px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Focus visible institucional: azul profundo 2px */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+@utility ethereal-card {
+  border: 1px solid color-mix(in oklab, var(--border) 75%, transparent);
+  border-radius: 1rem; /* 16px — manual */
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+  transition:
+    transform 250ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 250ms cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-float);
+  }
+}
+
+/* Tarjeta de bienestar (fondo menta) */
+@utility wellbeing-card {
+  border: 1px solid color-mix(in oklab, var(--teal) 25%, transparent);
+  border-radius: 1rem;
+  background: var(--bg-mint);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 250ms cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 250ms cubic-bezier(0.25, 1, 0.5, 1);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-float);
+  }
+}
+
+/* Tarjeta institucional lavanda */
+@utility lavender-card {
+  border: 1px solid color-mix(in oklab, var(--lavender) 40%, transparent);
+  border-radius: 1rem;
+  background: var(--bg-lavender);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Botón institucional (hover oscurece 10%) */
+@utility btn-institucional {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 0.75rem; /* 12px botones */
+  font-weight: 700;
+  transition: background-color 200ms ease, transform 120ms ease;
+  &:hover {
+    background-color: color-mix(in oklab, var(--primary) 90%, #000 10%);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Pressed micro-feedback on buttons: pressed escala 0.98 */
+button:not(:disabled):active,
+[role="button"]:not([aria-disabled="true"]):active {
+  transform: scale(0.98);
+  transition: transform 120ms ease;
+}
+
+.aurora-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--background);
+}
+
+.aurora-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(95px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Blob 1: Lila vívido #6857E4 */
+.aurora-blob-1 {
+  top: -10%;
+  left: 10%;
+  width: 38rem;
+  height: 38rem;
+  background: radial-gradient(circle, rgba(104, 87, 228, 0.14), transparent 70%);
+  opacity: 0.4;
+}
+
+/* Blob 2: Azul profundo #1B198F */
+.aurora-blob-2 {
+  top: 25%;
+  right: -8%;
+  width: 34rem;
+  height: 34rem;
+  background: radial-gradient(circle, rgba(27, 25, 143, 0.12), transparent 70%);
+  opacity: 0.35;
+}
+
+/* Blob 3: Verde azulado #12BDB6 */
+.aurora-blob-3 {
+  bottom: -10%;
+  left: 25%;
+  width: 36rem;
+  height: 36rem;
+  background: radial-gradient(circle, rgba(18, 189, 182, 0.1), transparent 70%);
+  opacity: 0.3;
+}
+
+.grain-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+}
+
+/* Versión oscura más sutil de la aurora (contraste AA y descanso visual) */
+.dark .aurora-blob-1 {
+  opacity: 0.18;
+  background: radial-gradient(circle, rgba(104, 87, 228, 0.3), transparent 70%);
+}
+
+.dark .aurora-blob-2 {
+  opacity: 0.14;
+  background: radial-gradient(circle, rgba(27, 25, 143, 0.4), transparent 70%);
+}
+
+.dark .aurora-blob-3 {
+  opacity: 0.12;
+  background: radial-gradient(circle, rgba(18, 189, 182, 0.2), transparent 70%);
+}
+
+.dark .grain-layer {
+  opacity: 0.1;
+}
+
+/* Mood circles alineados a paleta institucional */
+.mood-circle {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--primary);
+  transition: box-shadow 250ms ease;
+}
+.mood-illustration {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  display: block;
+}
+.mood-teal {
+  background: color-mix(in oklab, var(--lime) 25%, transparent);
+  border: 1px solid color-mix(in oklab, var(--lime) 30%, transparent);
+}
+.mood-cyan {
+  background: color-mix(in oklab, var(--cyan) 25%, transparent);
+  border: 1px solid color-mix(in oklab, var(--cyan) 30%, transparent);
+}
+.mood-mint {
+  background: color-mix(in oklab, var(--lavender) 30%, transparent);
+  border: 1px solid color-mix(in oklab, var(--lavender) 35%, transparent);
+}
+.mood-lavender {
+  background: color-mix(in oklab, var(--secondary) 22%, transparent);
+  border: 1px solid color-mix(in oklab, var(--secondary) 28%, transparent);
+}
+.mood-deep {
+  background: color-mix(in oklab, var(--alert) 25%, transparent);
+  border: 1px solid color-mix(in oklab, var(--alert) 32%, transparent);
+}
+
+.dark .mood-teal {
+  background: rgba(169, 219, 27, 0.16);
+  border: 1px solid rgba(169, 219, 27, 0.22);
+}
+.dark .mood-cyan {
+  background: rgba(0, 188, 200, 0.16);
+  border: 1px solid rgba(0, 188, 200, 0.22);
+}
+.dark .mood-mint {
+  background: rgba(195, 179, 241, 0.16);
+  border: 1px solid rgba(195, 179, 241, 0.22);
+}
+.dark .mood-lavender {
+  background: rgba(104, 87, 228, 0.18);
+  border: 1px solid rgba(104, 87, 228, 0.24);
+}
+.dark .mood-deep {
+  background: rgba(255, 156, 237, 0.16);
+  border: 1px solid rgba(255, 156, 237, 0.24);
+}
+.breathing-orb,
+.breathing-circle {
+  animation: breathing-478 19s ease-in-out infinite;
+  animation-iteration-count: infinite;
+}
+.breathing-orb-core,
+.breathing-circle-core {
+  animation: breathing-478-opacity 19s ease-in-out infinite;
+  animation-iteration-count: infinite;
+}
+
+@keyframes aurora-blob-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(10%, 15%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(-8%, 20%, 0) scale(0.95);
+  }
+}
+
+@keyframes aurora-blob-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-12%, 10%, 0) scale(1.1);
+  }
+  100% {
+    transform: translate3d(-18%, -8%, 0) scale(0.96);
+  }
+}
+
+@keyframes aurora-blob-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(14%, -12%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(5%, -18%, 0) scale(0.94);
+  }
+}
+
+@keyframes breathing-478 {
+  0% {
+    transform: scale(0.82);
+  }
+  21.0526%,
+  57.8947% {
+    transform: scale(1.16);
+  }
+  100% {
+    transform: scale(0.82);
+  }
+}
+@keyframes breathing-478-opacity {
+  0% {
+    opacity: 0.45;
+  }
+  21.0526%,
+  57.8947% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0.45;
+  }
+}
+
+@media (min-width: 640px) {
+  .mood-circle {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .aurora-blob {
+    animation: none !important;
+    transform: none !important;
+  }
+  .ethereal-card:hover {
+    transform: none !important;
+  }
+  button:not(:disabled):active,
+  [role="button"]:not([aria-disabled="true"]):active {
+    transform: none !important;
+  }
+}
+
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 1.2cm;
+  }
+  html,
+  body {
+    background: #FFFFFFFFFfff !important;
+    color: #0f172a !important;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+  .print-hidden,
+  nav,
+  aside,
+  header.screen-only-header {
+    display: none !important;
+  }
+  .print-only-block {
+    display: block !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
+/* REGLA ESTRICTA: Rosa de alerta #FF9CED y semáforo del panel NUNCA se alteran ni pierden legibilidad */
+.dark section[style*="#FF9CED"],
+.dark .bg-\[\#FF9CED\] {
+  color: #1a0e36 !important;
+}
+.dark section[style*="#FF9CED"] h1,
+.dark section[style*="#FF9CED"] p {
+  color: #1a0e36 !important;
+}
+.dark section[style*="#FF9CED"] button:not(.border-card) {
+  background-color: #1a0e36 !important;
+  color: #edeafb !important;
+}
+.dark section[style*="#FF9CED"] button.border-card {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #1a0e36 !important;
+  border-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ============================================================================
+ * Spinner institucional (azul profundo, no gris)
+ * ============================================================================
+ */
+.spinner-institucional {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid color-mix(in oklab, var(--primary) 20%, transparent);
+  border-top-color: var(--primary);
+  border-radius: 9999px;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
